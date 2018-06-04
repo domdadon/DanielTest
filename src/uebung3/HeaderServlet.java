@@ -1,7 +1,8 @@
-package rfds;
+package uebung3;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Enumeration;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,39 +11,39 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class SessionHandlingServlet
+ * Servlet implementation class HeaderServlet
  */
-@WebServlet("/readformdataservlet")
-public class ReadFormDataServlet extends HttpServlet {
+@WebServlet("/HeaderServlet")
+public class HeaderServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String output = "<!DOCTYPE html><html><head><title>Header-Informationen</title></head><body>";
+		output += "<h1>Ausgabe Header eines HTTP-Requests</h1>";
+		output += "<table border=\"1\"><tr><th>Header-Name</th><th>Header-Inhalt</th></tr>";
+		Enumeration<String> headerNames = request.getHeaderNames();
+		while (headerNames.hasMoreElements()) {
+			String headerName = headerNames.nextElement();
+			output += "<tr><td>" + headerName + "</td><td>"; 
+			Enumeration<String> values = request.getHeaders(headerName);
+			while (values.hasMoreElements()) {
+				String value = values.nextElement();
+				output += value + "; ";
+			}
+			output += "</td></tr>";
+		}
+		output += ("</table></body></html>");
+		
 		// HTTP-Header setzen
 		response.setStatus(HttpServletResponse.SC_OK);	// nicht zwingend erforderlich; ist der default-Wert
 		response.setContentType("text/html");
 		response.setCharacterEncoding("UTF-8");
 		
-		request.setCharacterEncoding("UTF-8");	// In diesem Format erwartet das Servlet jetzt die Formulardaten
-		// Alternative: GlassFish dazu bewegen, die Formulardaten gleich
-		// als UTF-8 zu interpretieren. Dazu muss GlassFish auf UTF-8 umge-
-		// stellt werden. Eine neue Zeile in die Datei glassfish-web.xml
-		// ergänzen (zu finden im WEB-INF-Ordner des Projektes):
-		// <parameter-encoding default-charset="UTF-8" />
-		
-		final PrintWriter out = response.getWriter();
-		String vorname = request.getParameter("vorname");
-		String nachname = request.getParameter("nachname");
-		out.println("<!DOCTYPE html>");
-		out.println("<html>");
-		out.println("<body>");
-		out.println("<h3>Empfangene Formulardaten</h3>");
-		out.println("Vorname: " + vorname + "<br>");
-		out.println("Nachname: " + nachname + "<br>");
-		out.println("</body>");
-		out.println("</html>");
+		// HTML-Ergebnis senden
+		response.getWriter().println(output);
 	}
 
 	/**
@@ -52,4 +53,5 @@ public class ReadFormDataServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
+
 }
