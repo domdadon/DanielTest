@@ -20,7 +20,4 @@ public class testbean implements Serializable {
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
 	}
-	
-	
-	
 }

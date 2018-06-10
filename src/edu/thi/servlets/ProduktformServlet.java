@@ -1,4 +1,4 @@
-package testservlet;
+package edu.thi.servlets;
 
 import java.io.IOException;
 
@@ -8,31 +8,31 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import testbean.testbean;
+import edu.thi.bean.Product;
 
 /**
- * Servlet implementation class testservlet
+ * Servlet implementation class ProduktformServlet
  */
-@WebServlet("/testservlet")
-public class testservlet extends HttpServlet {
+@WebServlet("/produktformservlet")
+public class ProduktformServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		testbean form = new testbean();
-		form.setFirstname(request.getParameter("vorname"));
-		form.setLastname(request.getParameter("nachname"));
+		Product form = new Product();
+		form.setProductid(request.getParameter("productid"));
+		form.setProductname(request.getParameter("productname"));
+		form.setQuantity(Integer.valueOf(request.getParameter("quantity")));
+		form.setSupplier(request.getParameter("supplier"));
 		
-		final HttpSession session = request.getSession();
-		session.setAttribute("form", form);
+		// Scope "Request"
+		request.setAttribute("myProductForm", form);
 		
-		final RequestDispatcher dispatcher = request.getRequestDispatcher("myform/myformausgabe.jsp");
-		dispatcher.forward(request, response);
-	}
+		// Weiterleiten an JSP
+		final RequestDispatcher dispatcher = request.getRequestDispatcher("uebung4_Aufg1/produktform.jsp");
+		dispatcher.forward(request, response);	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

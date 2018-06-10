@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Produktformular</title>
+	  <style>
+		/* Elemente positionieren und Formular ausrichten */
+		label {
+			min-width: 6em;
+			display: inline-block;
+			text-align: left;
+		}
+		input {
+			width: 20em;
+		}
+		
+		textarea {
+			width: 20em;
+			border: 1px solid black;
+		}
+		input[type="checkbox"], input[type="radio"] {
+			width: auto;
+		}
+		label {
+			vertical-align: top;
+		}
+		input[type="checkbox"], button[type="submit"] {
+			margin-left: 8em;
+		}
+		button {
+			width: 10em;
+		}
+		
+		/* Formular optisch stylen.		  *
+		 * Vorgehen: von innen nach außen */
+		fieldset {
+			width: 30em;
+			padding-top: 1.5em;
+			padding-left: 1.5em;
+			background: #e6eeff;
+			border: 1px solid #000330;
+			border-radius: 5px;
+		}
+		legend {
+			background: white;
+			padding: 0.2em;
+			border: 1px solid #000330;
+			border-radius: 5px;
+		}
+		
+		/* Interaktionen über Pseudoklassen */
+		input:hover, textarea:hover {
+			background: #fffff0;
+			border: 2px solid #efe816;
+			box-shadow: 0 0 10px rgba(0,0,0,0.2);
+		}
+		button:hover {
+			background: #c9c9c9;
+			border: 2px solid #6c6c6c;
+		}
+		button:active {
+			background: #8f8f8f;
+		}
+		
+
+		/* Damit Felder nicht zu dicht folgen */
+		form div { 
+			padding: 0.2em; 
+		}
+	  </style>
+	</head>
+	<body>
+		<h1>Produktformular</h1>
+		<form method="post" action="../produktformservlet">
+			<div>
+				<label for="productid_id">Produkt-ID:</label>
+				<input type="text" name="productid" id="productid_id" />
+			</div>
+			<div>
+				<label for="productname_id">Produktname:</label>
+				<input type="text" name="productname" id="productname_id" />
+			</div>
+			<div>
+				<label for="quantity_id">Menge:</label>
+				<input type="number" name="quantity" id="quantity_id" />
+			</div>
+				<div>
+				  <label for="supplier_id">Lieferanten:</label>
+				  <select name="supplier" id="supplier_id" size="3">
+					<option value="supplier_01" selected>Lieferant 1</option>
+					<option value="supplier_02">Lieferant 2</option>
+					<option value="supplier_03">Lieferant 3</option>
+					<option value="supplier_04">Lieferant 4</option>
+					<option value="supplier_05">Lieferant 5</option>
+					<option value="supplier_06">Lieferant 6</option>
+					<option value="supplier_07">Lieferant 7</option>
+				  </select>
+				</div>
+			<div>
+				<button type="submit" id="button">Daten senden</button>
+			</div>
+		</form>
+	</body>
+</html>
