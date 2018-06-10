@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Setzen von Daten in Cookies</title>
+	</head>
+	<body>
+		<h1>Setzen von Daten in Cookies</h1>
+		<form method="post" action="../cookiehandlingservlet">
+			<div>
+				<label for="vorname">Vorname:</label>
+				<input type="text" name="vorname" id="vorname" placeholder="Geben Sie hier Ihren Vornamen ein." title="Vorname eingeben" required autofocus />
+			</div>
+			<div>
+				<label for="nachname">Nachname:</label>
+				<input type="text" name="nachname" id="nachname" placeholder="Geben Sie hier Ihren Nachnamen ein." title="Nachname eingeben" required />
+			</div>
+			<div>
+				<button type="submit" name="action" value="writeToCookies">Daten als Cookies setzen</button>
+			</div>
+		</form>
+	</body>
+</html>
