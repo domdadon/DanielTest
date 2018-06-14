@@ -31,7 +31,7 @@ public class ProduktformServlet extends HttpServlet {
 		request.setAttribute("myProductForm", form);
 		
 		// Weiterleiten an JSP
-		final RequestDispatcher dispatcher = request.getRequestDispatcher("uebung4_Aufg1/produktform.jsp");
+		final RequestDispatcher dispatcher = request.getRequestDispatcher("uebung_4_Aufg1/produktform.jsp");
 		dispatcher.forward(request, response);	}
 
 	/**
