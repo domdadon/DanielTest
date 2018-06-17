@@ -1,7 +1,6 @@
 package uebung5;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public class Product implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -9,8 +8,6 @@ public class Product implements Serializable {
 	private Long id;
 	private String productname;
 	private Integer quantity;
-	private Date proddate;
-	private Date prodtime;
 	
 	public Long getId() {
 		return id;
@@ -29,17 +26,5 @@ public class Product implements Serializable {
 	}
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
-	}
-	public Date getProddate() {
-		return proddate;
-	}
-	public void setProddate(Date proddate) {
-		this.proddate = proddate;
-	}
-	public Date getProdtime() {
-		return prodtime;
-	}
-	public void setProdtime(Date prodtime) {
-		this.prodtime = prodtime;
 	}
 }

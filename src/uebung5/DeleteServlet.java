@@ -3,7 +3,6 @@ package uebung5;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
 import javax.annotation.Resource;
 import javax.servlet.RequestDispatcher;
@@ -15,59 +14,45 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 /**
- * Servlet implementation class CreateServlet
+ * Servlet implementation class DeleteServlet
  */
-@WebServlet("/createservlet")
-public class CreateServlet extends HttpServlet {
+@WebServlet("/deleteservlet")
+public class DeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	
 	@Resource(lookup="jdbc/MyTHIPool")
 	private DataSource ds;
-	
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//Auslesen der Formularwerte productname, quantity
-		Product form = new Product();
-		form.setProductname(request.getParameter("productname"));
-		form.setQuantity(Integer.valueOf(request.getParameter("quantity")));
+		// Servlet zur Entgegennahme von Formularinhalten, Löschen der Daten in einer DB und Generierung
+		// eines Feldes zur Weitergabe an eine JSP
+		request.setCharacterEncoding("UTF-8");	// In diesem Format erwartet das Servlet jetzt die Formulardaten
+		Long id = Long.valueOf(request.getParameter("id"));
 		
-		//DB-Zugriff
-		persist(form);
-	
+		// DB-Zugriff
+		delete(id);
+				
 		// Scope "Request"
-		request.setAttribute("form", form);
-			
+		request.setAttribute("id", id);
+		
 		// Weiterleiten an JSP
-		final RequestDispatcher dispatcher = request.getRequestDispatcher("uebung_5_Aufg1/1_outputdata.jsp");
-		dispatcher.forward(request, response);
+		final RequestDispatcher dispatcher = request.getRequestDispatcher("uebung_5_Aufg1/2_deleteentry.jsp");
+		dispatcher.forward(request, response);	
 	}
 
-	private void persist(Product form) throws ServletException {
-		String[] generatedKeys = new String[] {"id"};	// Name der Spalte(n), die automatisch generiert wird(werden)
-		
+	private void delete(Long id) throws ServletException {
+		// DB-Zugriff
 		try (Connection con = ds.getConnection();
-			PreparedStatement pstmt = con.prepareStatement(
-					"INSERT INTO products (productname,quantity) VALUES (?,?)", 
-					generatedKeys)){
-
-			// Zugriff über Klasse java.sql.PreparedStatement
-			pstmt.setString(1, form.getProductname());
-			pstmt.setInt(2, form.getQuantity());
+			 PreparedStatement pstmt = con.prepareStatement("DELETE FROM products WHERE id = ?")){
+			pstmt.setLong(1, id);
 			pstmt.executeUpdate();
-			
-			// Generierten Schlüssel auslesen
-			ResultSet rs = pstmt.getGeneratedKeys();
-			while (rs.next()) {
-				form.setId(rs.getLong(1));
-			}
 		} catch (Exception ex) {
 			throw new ServletException(ex.getMessage());
 		}
-		
 	}
-
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -76,5 +61,4 @@ public class CreateServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-
 }
