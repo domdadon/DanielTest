@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="UTF-8">
-		<title>Daten in DB über JDBC speichern</title>
+	  <meta charset="UTF-8">
+	  <title>Produkteinträge suchen</title>
 	  <style>
 		/* Elemente positionieren und Formular ausrichten */
 		label {
-			min-width: 11em;
+			min-width: 6em;
 			display: inline-block;
 			text-align: left;
 		}
@@ -14,18 +14,8 @@
 			width: 20em;
 		}
 		
-		textarea {
-			width: 20em;
-			border: 1px solid black;
-		}
-		input[type="checkbox"], input[type="radio"] {
-			width: auto;
-		}
 		label {
 			vertical-align: top;
-		}
-		input[type="checkbox"], button[type="submit"] {
-			margin-left: 8em;
 		}
 		button {
 			width: 10em;
@@ -49,7 +39,7 @@
 		}
 		
 		/* Interaktionen über Pseudoklassen */
-		input:hover, textarea:hover {
+		input:hover {
 			background: #fffff0;
 			border: 2px solid #efe816;
 			box-shadow: 0 0 10px rgba(0,0,0,0.2);
@@ -70,20 +60,17 @@
 	  </style>
 	</head>
 	<body>
-		<h1>Daten in DB über JDBC speichern</h1>
-		<form method="post" action="../createservlet">
-			<fieldset><legend>Produktdaten</legend>
-			<div>
-				<label for="productname">Produktname:</label>
-				<input type="text" name="productname" id="productname" required/>
-			</div>
-			<div>
-				<label for="quantity">Menge:</label>
-				<input type="number" name="quantity" id="quantity" required/>
-			</div>
-			<div>
-				<button type="submit" id="button">Daten speichern</button>
-			</div>
+		<h1>Produkteinträge suchen</h1>
+		<form id="myForm" method="post" action="../searchservlet">
+			<fieldset><legend>Produkteinträge suchen</legend>
+				<div>
+				  <label for="productname">Produktname:</label>
+				  <input type="text" name="productname" id="productname" placeholder="Produktname">
+				</div>
+				<div>
+				  <button name="submit" type="submit">Suche starten</button>
+				  <button name="reset" type="reset">Zurücksetzen</button>
+				</div>
 			</fieldset>
 		</form>
 		<footer class="foot"><br>Design basiert auf: Wolf, Jürgen: HTML5 und CSS3, Das umfassende Handbuch, Bonn: Rheinwerk, 2015</footer>
