@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Elemente mit float nebeneinander anordnen</title>
+    <meta charset="UTF-8">
+    <style> 
+      .foothead {
+        clear: left;
+        width: 644px;
+        padding: 10px;
+        border: 1px solid lightgrey;
+        text-align: center;
+       }
+      .article01 {
+        float: left;
+        width: 200px;
+        padding: 10px;
+        border: 1px solid black;
+        background-color: yellow;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="foothead">Kopfzeile</header>
+      <article class="article01">
+        <h1>float: left; (1)</h1>
+        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. </p>
+      </article>
+      <article class="article01">
+        <h1>float: left; (2)</h1>
+        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. </p>
+      </article>
+      <article class="article01">
+        <h1>float: left; (3)</h1>
+        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Lorem ipsum dolor sit amet. </p>
+      </article>
+      <article class="article01">
+        <h1>float: left; (4)</h1>
+        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. </p>
+      </article>
+    <footer class="foothead">Basiert auf: Wolf, Jürgen: HTML5 und CSS3, Das umfassende Handbuch, Bonn: Rheinwerk, 2015</footer>
+  </body>
+</html>
